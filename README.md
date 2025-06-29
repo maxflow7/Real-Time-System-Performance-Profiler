@@ -6,8 +6,8 @@ Real-Time System Performance Profiler with Web Visualization
 
 This project creates an end-to-end system for real-time performance monitoring and visualization, combining low-level hardware performance counter collection with modern web-based visualization. The system consists of three main components:
 
-    1. A **C++ data collector** using Linux's **perf_event_open** system call
-    2. A **Python web server** with REST API endpoints
+    1. A C++ data collector using Linux's perf_event_open system call
+    2. A Python web server with REST API endpoints
     3. A JavaScript web frontend with dynamic charts
 
 
@@ -50,8 +50,8 @@ The solution follows a producer-consumer pattern:
 
     1. Provides two main API endpoints:
 
-        a. **/api/data**   - Returns all collected performance data
-        b. **/api/latest** - Returns only the most recent data sample
+        a. /api/data   - Returns all collected performance data
+        b. /api/latest - Returns only the most recent data sample
 
     2. Implements thread-safe data reading from the CSV file
     3. Serves the web frontend HTML/JS/CSS files
@@ -90,23 +90,23 @@ The solution follows a producer-consumer pattern:
 
 ## Installation Steps:
 
-    1. **Clone the repository**:
+    1. Clone the repository:
 
         bash
         git clone https://github.com/your-repo/system-profiler.git
         cd system-profiler
 
-    2. **Install Python dependencies** :
+    2. Install Python dependencies :
 
         bash
         pip install -r requirements.txt
 
-    3. **Compile the C++ collector** :
+    3. Compile the C++ collector :
 
         bash
         g++ -o perf_collector perf_collector.cpp -O2 -lpthread
 
-    4. **Execution Steps** :
+    4. Execution Steps :
 
         a. Start the data collector (in terminal 1):
 
@@ -118,7 +118,7 @@ The solution follows a producer-consumer pattern:
             bash
             python server.py
 
-    5. **Access the dashboard** :
+    5. Access the dashboard :
 
         Open http://localhost:5000 in your browser
 
