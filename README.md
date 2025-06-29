@@ -24,10 +24,10 @@ This project creates an end-to-end system for real-time performance monitoring a
 
 The solution follows a producer-consumer pattern:
 
-    **Producer**      : C++ application collecting hardware metrics
-    **Data Bridge**   : CSV file acting as circular buffer
-    **Consumer**      : Python web server with REST API
-    **Visualization** : Browser-based interface with auto-refreshing charts
+    Producer      : C++ application collecting hardware metrics
+    Data Bridge   : CSV file acting as circular buffer
+    Consumer      : Python web server with REST API
+    Visualization : Browser-based interface with auto-refreshing charts
 
 
 # Technical Components
