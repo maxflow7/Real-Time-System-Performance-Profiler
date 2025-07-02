@@ -12,21 +12,7 @@
 #include <sstream>            // For string operations
 
 
-//perf_event_open syscall wrapper
-
-/*
-Wraps the Linux system call to access performance monitoring
-
-Parameters:
-
-1. hw_event: Pointer to perf_event_attr structure (configures the counter)
-2. pid: Process ID to monitor (0 = current process)
-3. cpu: CPU to monitor (-1 = any CPU)
-4. group_fd: Group leader file descriptor (-1 = no group)
-5. flags: Additional flags (0 = default)
-
-*/
-
+//perf_event_open syscall wrapper, Wraps the Linux system call to access performance monitoring
 static long perf_event_open(struct perf_event_attr *hw_event, pid_t pid,
                            int cpu, int group_fd, unsigned long flags) {
     return syscall(__NR_perf_event_open, hw_event, pid, cpu, group_fd, flags);
@@ -48,20 +34,15 @@ public:
         pe.exclude_hv = 1;              // Don't count hypervisor events
     }
 
-   /*
-   The open() method is responsible for initializing the performance counter by making the
-    perf_event_open() system call. 
-   */
+   
+   //The open() method is responsible for initializing the performance counter by making the perf_event_open() system call. 
     bool open(pid_t pid = 0, int cpu = -1, int group_fd = -1) {
         fd = perf_event_open(&pe, pid, cpu, group_fd, 0);
         return fd != -1;
     }
 
-    /*
-    The start() function is part of the PerfCounter class and is responsible for preparing and enabling 
-    the performance counter for data collection. Here's a breakdown of what it does:
-    */
-
+    
+    //The start() function is part of the PerfCounter class and is responsible for preparing and enabling the performance counter for data collection. Here's a breakdown of what it does:
     void start() {
         ioctl(fd, PERF_EVENT_IOC_RESET, 0); //instruct the kernel to reset the counter , start fresh do not include previous measurements
 
@@ -69,18 +50,14 @@ public:
     }
 
 
-    /*
-    The stop() function is part of the PerfCounter class and is responsible for disabling the performance 
-    counter, stopping it from tracking events.
-    */
+    
+    //The stop() function is part of the PerfCounter class and is responsible for disabling the performance counter, stopping it from tracking events.
     void stop() {
         ioctl(fd, PERF_EVENT_IOC_DISABLE, 0);
     }
 
-    /*
-    The read() function is part of the PerfCounter class and is responsible for retrieving the current
-     value of the performance counter. 
-    */
+    
+    //The read() function is part of the PerfCounter class and is responsible for retrieving the current value of the performance counter. 
     uint64_t read() {
 
         uint64_t count; // This variable will hold the count of events recorded by the performance counter
@@ -90,10 +67,8 @@ public:
         return (n == sizeof(count)) ? count : 0;
     }
 
-    /*
-    The close() function is part of the PerfCounter class and is responsible for releasing the resources 
-    associated with the performance counter.
-    */
+    
+    //The close() function is part of the PerfCounter class and is responsible for releasing the resources associated with the performance counter.
     void close() {
         if (fd != -1) {
             ::close(fd);
@@ -111,10 +86,8 @@ private:
 };
 
 void collect_data(const std::string& output_file) {
-    // Create counters for different metrics
-
-    //instance of the class, each configured to monitor a specific hardware event.
-    
+  
+    // Create counters for different metrics instance of the class, each configured to monitor a specific hardware event.  
     PerfCounter cycles(PERF_TYPE_HARDWARE, PERF_COUNT_HW_CPU_CYCLES);
     PerfCounter instructions(PERF_TYPE_HARDWARE, PERF_COUNT_HW_INSTRUCTIONS);
     PerfCounter cache_misses(PERF_TYPE_HARDWARE, PERF_COUNT_HW_CACHE_MISSES);
