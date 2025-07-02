@@ -1,15 +1,15 @@
 // perf_collector.cpp
-#include <linux/perf_event.h>  // For perf_event_attr and perf event definitions
-#include <sys/ioctl.h>         // For ioctl() system call
-#include <asm/unistd.h>        // For syscall numbers (__NR_perf_event_open)
-#include <unistd.h>            // For syscall(), read(), close()
-#include <iostream>            // For console output
-#include <vector>              // For potential data storage
-#include <cstring>            // For memset()
-#include <thread>             // For sleep functionality
-#include <chrono>             // For timestamps
-#include <fstream>            // For file operations
-#include <sstream>            // For string operations
+#include <linux/perf_event.h>  
+#include <sys/ioctl.h>         
+#include <asm/unistd.h>       
+#include <unistd.h>           
+#include <iostream>           
+#include <vector>              
+#include <cstring>            
+#include <thread>            
+#include <chrono>            
+#include <fstream>           
+#include <sstream>            
 
 
 //perf_event_open syscall wrapper, Wraps the Linux system call to access performance monitoring
