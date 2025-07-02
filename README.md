@@ -122,6 +122,11 @@ The solution follows a producer-consumer pattern:
 
         Open http://localhost:5000 in your browser
 
+    6. UI of the profiler
+
+      ![image](https://github.com/user-attachments/assets/d0ed44b0-3fe9-4bd2-92e0-fd72d6bd8562)
+      ![image](https://github.com/user-attachments/assets/1da05939-1035-4715-8e44-e3912ca0d7aa)
+      ![image](https://github.com/user-attachments/assets/5a070af1-2f6f-4160-938b-e4b6cb4b7cbf)
 
 This project bridges the gap between low-level performance monitoring and modern web-based visualization, making system performance analysis more accessible and intuitive. The modular design allows for easy extension with new metrics or visualization types.
 
